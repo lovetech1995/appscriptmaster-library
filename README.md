@@ -191,10 +191,53 @@ function testNumeral() {
 }
 ```
 
+## Sử dụng dưới dạng Thư viện Apps Script
+
+Ngoài việc sao chép mã nguồn, bạn có thể tích hợp toàn bộ dự án này như một thư viện chỉ với vài bước đơn giản.
+
+### 1. Thêm thư viện vào dự án của bạn
+
+1.  Mở dự án Google Apps Script.
+2.  Nhấp vào biểu tượng **Libraries** (`+` bên cạnh "Thư viện").
+3.  Trong ô "Thêm thư viện", dán ID sau:
+    ```
+    10vKTX11KgffA1SLyKzvYbu8n_n2ehVncvV7a0SK_J-FFl9Sv6CD40MGt
+    ```
+4.  Nhấp vào **Look up**.
+5.  Chọn phiên bản mới nhất.
+6.  Để nguyên mã nhận dạng Mặc định là `ASM` (hoặc đổi tên nếu muốn). Đây sẽ là tên bạn dùng để gọi các hàm từ thư viện.
+7.  Nhấp vào **Add**.
+
+### 2. Cách gọi hàm từ thư viện
+
+Sau khi thêm thư viện, bạn có thể gọi bất kỳ lớp hoặc hàm nào bằng cách sử dụng mã nhận dạng đã chọn.
+
+**Ví dụ:** Sử dụng lớp `sheet` từ thư viện.
+
+```javascript
+function suDungThuVienSheet() {
+  // Thay vì "new sheet()", bạn sẽ dùng "new AppScriptMaster.sheet()"
+  const sheet = new ASM.sheet("ID_CUA_SPREADSHEET", "TEN_CUA_SHEET");
+
+  const data = sheet.getDoc("some_id", "id");
+  console.log(data);
+}
+```
+
+**Ví dụ:** Sử dụng `lodash` (được export dưới tên `lodash` trong thư viện).
+
+```javascript
+function suDungLodashQuaThuVien() {
+  const numbers = [1, 2, 3, 4, 5];
+
+  // Gọi hàm chunk thông qua AppScriptMaster._
+  const chunks = ASM.lodash.chunk(numbers, 2);
+  console.log(chunks); // [[1, 2], [3, 4], [5]]
+}
+```
+
 ---
 
 Cảm ơn bạn đã quan tâm! Dự án sẽ liên tục được cập nhật và hoàn thiện, nhằm đóng góp cho cộng đồng yêu thích Google Apps Script những công cụ chuyên nghiệp và hữu ích nhất.
 
-```
-
-```
+---
